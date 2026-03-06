@@ -1,0 +1,426 @@
+<!doctype html>
+<html lang="es">
+	<head>
+		<meta charset="UTF-8" />
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<title>Planimetría Operativa</title>
+		<link rel="stylesheet" href="index.css" />
+	</head>
+	<body>
+		<div class="app-shell">
+			<header class="topbar">
+				<div class="topbar__context">
+					<div class="breadcrumb" id="breadcrumbText">Evento Expo 2026 / Recinto Norte / Pabellón A / Planta 1</div>
+					<div class="state-line">
+						<span class="pill" id="projectPill">Proyecto: Expo Madrid 2026</span>
+						<span class="pill pill--info" id="viewPill">Vista: Publicado</span>
+						<span class="pill pill--accent" id="modePill">Modo: Mi borrador</span>
+						<span class="pill pill--warning" id="statusPill">Estado: Pendiente de aprobación</span>
+						<span class="pill" id="autosavePill">Autosave: --</span>
+						<span class="pill">Base: versión 24</span>
+						<span class="pill">Último publicador: Arq. Laura Gómez</span>
+					</div>
+				</div>
+
+				<div class="topbar__actions">
+					<div class="presence" id="presenceBar" title="Colaboradores activos"></div>
+
+					<label class="inline-label" for="roleSelect">Rol</label>
+					<select id="roleSelect" aria-label="Selector de rol">
+						<option value="comercial" selected>Comercial</option>
+						<option value="arquitecto">Arquitecto</option>
+					</select>
+
+					<div class="segmented" role="tablist" aria-label="Modo de trabajo">
+						<button class="segmented__btn is-active" data-mode="publicado">Publicado</button>
+						<button class="segmented__btn" data-mode="borrador">Mi borrador</button>
+						<button class="segmented__btn" data-mode="comparar">Comparar</button>
+					</div>
+
+					<button class="btn btn--secondary">Guardar borrador</button>
+					<button class="btn btn--secondary">Enviar a aprobación</button>
+					<button class="btn btn--primary" id="publishBtn" disabled>Publicar</button>
+				</div>
+			</header>
+
+			<div class="project-entry" aria-label="Acceso a proyectos">
+				<button class="project-entry__btn" data-screen="proyectos">← Volver a proyectos</button>
+			</div>
+
+			<div class="workspace-layout">
+				<nav class="task-nav" aria-label="Navegación principal">
+					<button class="task-nav__item" data-screen="resumen">Resumen</button>
+					<button class="task-nav__item is-active" data-screen="plano">Plano</button>
+					<button class="task-nav__item" data-screen="solicitudes">Solicitudes</button>
+					<button class="task-nav__item" data-screen="versiones">Versiones</button>
+					<button class="task-nav__item" data-screen="expositores">Expositores</button>
+					<button class="task-nav__item" data-screen="informes">Informes</button>
+				</nav>
+
+				<main class="screen-stack">
+					<section class="screen" id="screen-proyectos" aria-label="Dashboard de proyectos">
+						<div class="metrics-grid">
+							<article class="card">
+								<h3>Proyectos activos</h3>
+								<p class="metric">12</p>
+								<p class="muted">3 con solicitudes urgentes</p>
+							</article>
+							<article class="card">
+								<h3>Publicaciones esta semana</h3>
+								<p class="metric">9</p>
+								<p class="muted">en 6 recintos distintos</p>
+							</article>
+							<article class="card">
+								<h3>Solicitudes pendientes</h3>
+								<p class="metric">47</p>
+								<p class="muted">14 requieren revisión arquitecto</p>
+							</article>
+							<article class="card">
+								<h3>Conflictos activos</h3>
+								<p class="metric">11</p>
+								<p class="muted">7 en pabellones de alta ocupación</p>
+							</article>
+						</div>
+
+						<div class="projects-toolbar card">
+							<h3>Cartera de proyectos</h3>
+							<p class="muted">Selecciona un proyecto para entrar a su dashboard operativo.</p>
+							<input class="search" type="search" placeholder="Buscar proyecto, recinto o ciudad" />
+						</div>
+
+						<div class="projects-grid">
+							<article class="card project-card is-current" data-project-name="Expo Madrid 2026" data-project-breadcrumb="Evento Expo 2026 / Recinto Norte / Pabellón A / Planta 1">
+								<h3>Expo Madrid 2026</h3>
+								<ul class="list">
+									<li>Estado general: Operativo</li>
+									<li>Solicitudes pendientes: 18</li>
+									<li>Última publicación: versión 24</li>
+								</ul>
+								<button class="btn btn--primary open-project-btn" data-project-name="Expo Madrid 2026" data-project-breadcrumb="Evento Expo 2026 / Recinto Norte / Pabellón A / Planta 1">Abrir proyecto</button>
+							</article>
+
+							<article class="card project-card" data-project-name="Feria Valencia 2026" data-project-breadcrumb="Feria Valencia 2026 / Recinto Levante / Pabellón B / Planta 2">
+								<h3>Feria Valencia 2026</h3>
+								<ul class="list">
+									<li>Estado general: Pendiente de revisión</li>
+									<li>Solicitudes pendientes: 9</li>
+									<li>Última publicación: versión 12</li>
+								</ul>
+								<button class="btn btn--secondary open-project-btn" data-project-name="Feria Valencia 2026" data-project-breadcrumb="Feria Valencia 2026 / Recinto Levante / Pabellón B / Planta 2">Abrir proyecto</button>
+							</article>
+						</div>
+					</section>
+
+					<section class="screen" id="screen-resumen" aria-label="Dashboard del evento">
+						<div class="metrics-grid">
+							<article class="card">
+								<h3>Ocupación</h3>
+								<p class="metric">81%</p>
+								<p class="muted">1.352 stands de 1.670</p>
+							</article>
+							<article class="card">
+								<h3>Superficie vendida</h3>
+								<p class="metric">42.100 m²</p>
+								<p class="muted">+4.2% vs semana pasada</p>
+							</article>
+							<article class="card">
+								<h3>Solicitudes pendientes</h3>
+								<p class="metric">18</p>
+								<p class="muted">6 de alta prioridad</p>
+							</article>
+							<article class="card">
+								<h3>Alertas</h3>
+								<p class="metric">5</p>
+								<p class="muted">2 conflictos geométricos</p>
+							</article>
+						</div>
+					</section>
+
+					<section class="screen is-visible" id="screen-plano" aria-label="Editor del plano">
+						<div class="editor-layout" id="editorLayout">
+							<aside class="left-panel panel-collapsible" id="leftPanel">
+								<section class="panel-block">
+									<div class="dock-head">
+										<h3>Jerarquía del proyecto</h3>
+										<button class="dock-toggle" data-collapse="left">⟨</button>
+									</div>
+									<input class="search" id="hierarchySearch" type="search" placeholder="Buscar stand ID" />
+									<div class="tree-wrapper" id="treeWrapper">
+										<details data-node-id="recinto-norte" open>
+											<summary><span class="tree-icon">🏟️</span>Recinto Norte</summary>
+											<details data-node-id="pab-a" open>
+												<summary><span class="tree-icon">🏢</span>Pabellón A</summary>
+												<details data-node-id="planta-1" open>
+													<summary><span class="tree-icon">🧱</span>Planta 1</summary>
+													<details data-node-id="isla-a1" open>
+														<summary><span class="tree-icon">🔷</span>Isla A1</summary>
+														<ul class="tree-stands">
+															<li class="tree-stand" data-stand-id="A12">Stand A12</li>
+															<li class="tree-stand" data-stand-id="A13">Stand A13</li>
+															<li class="tree-stand" data-stand-id="A14">Stand A14</li>
+														</ul>
+													</details>
+												</details>
+											</details>
+										</details>
+									</div>
+								</section>
+
+								<section class="panel-block">
+									<h3>Capas y filtros</h3>
+									<div class="layer-grid">
+										<label><input class="layer-toggle" data-layer="stands" type="checkbox" checked /> Stands</label>
+										<label><input class="layer-toggle" data-layer="corridors" type="checkbox" checked /> Pasillos</label>
+										<label><input class="layer-toggle" data-layer="walls" type="checkbox" checked /> Muros</label>
+										<label><input class="layer-toggle" data-layer="structure" type="checkbox" checked /> Estructura</label>
+										<label><input class="layer-toggle" data-layer="commercial" type="checkbox" checked /> Overlay comercial</label>
+										<label><input class="layer-toggle" data-layer="workflow" type="checkbox" checked /> Overlay workflow</label>
+										<label><input class="layer-toggle" data-layer="comments" type="checkbox" checked /> Comentarios</label>
+									</div>
+
+									<div class="filter-grid">
+										<select id="filterCommercial">
+											<option value="">Estado comercial</option>
+											<option value="disponible">Disponible</option>
+											<option value="reservado">Reservado</option>
+											<option value="vendido">Vendido</option>
+											<option value="bloqueado">Bloqueado</option>
+										</select>
+										<select id="filterWorkflow">
+											<option value="">Workflow</option>
+											<option value="modificado">Modificado</option>
+											<option value="pendiente">Pendiente</option>
+											<option value="conflicto">Conflicto</option>
+											<option value="rechazado">Rechazado</option>
+										</select>
+										<select id="filterIsland">
+											<option value="">Isla</option>
+											<option value="A1">A1</option>
+											<option value="B1">B1</option>
+										</select>
+										<input id="filterExhibitor" class="search" type="search" placeholder="Expositor" />
+										<input id="filterSizeMin" type="number" placeholder="m² min" />
+										<input id="filterSizeMax" type="number" placeholder="m² max" />
+										<input id="filterPriceMin" type="number" placeholder="€ min" />
+										<input id="filterPriceMax" type="number" placeholder="€ max" />
+									</div>
+									<div class="stack-actions">
+										<button class="btn btn--secondary" id="resetFiltersBtn">Reset filtros</button>
+									</div>
+									<div class="chip-wrap" id="activeFilterChips"></div>
+								</section>
+							</aside>
+
+							<section class="canvas-zone">
+								<div class="analytics-strip">
+									<div class="chip">Total: <strong id="metricTotal">0 m²</strong></div>
+									<div class="chip">Vendida: <strong id="metricSold">0 m²</strong></div>
+									<div class="chip">Reservada: <strong id="metricReserved">0 m²</strong></div>
+									<div class="chip">Disponible: <strong id="metricAvailable">0 m²</strong></div>
+									<div class="chip">Revenue: <strong id="metricRevenue">0 €</strong></div>
+								</div>
+
+								<div class="toolbar toolbar--base" aria-label="Barra base">
+									<button class="dock-toggle" data-collapse="left">Panel izq</button>
+									<button class="dock-toggle" data-collapse="right">Panel der</button>
+									<button id="zoomInBtn">Zoom +</button>
+									<button id="zoomOutBtn">Zoom -</button>
+									<input id="smartStandSearch" class="search search-inline" type="search" placeholder="Buscar stand, expositor, estado o m²" />
+									<button id="multiSelectBtn">Multi-selección</button>
+									<button id="createGroupBtn">Crear grupo</button>
+								</div>
+
+								<div class="toolbar toolbar--context" id="contextToolbar" aria-label="Barra contextual">
+									<button id="compareOverlayBtn" class="is-active">Comparación overlay</button>
+									<button id="compareSplitBtn">Comparación side-by-side</button>
+									<button id="addCommentBtn">Comentar stand</button>
+								</div>
+
+								<div class="draft-banner" id="draftBanner" hidden>
+									Estás trabajando en un borrador no publicado · Autosave activo
+								</div>
+
+								<div class="canvas-viewport" id="canvasViewport">
+									<div class="canvas" aria-label="Lienzo 2D" id="canvas">
+										<div class="canvas-stage" id="canvasStage">
+											<div class="shape shape--corridor" data-layer-kind="corridors" style="top: 58%; left: 4%; width: 84%; height: 6%;"></div>
+											<div class="shape shape--wall" data-layer-kind="walls" style="top: 7%; left: 7%; width: 2%; height: 78%;"></div>
+											<div class="shape shape--wall" data-layer-kind="walls" style="top: 7%; left: 7%; width: 80%; height: 2%;"></div>
+											<div class="shape shape--structure" data-layer-kind="structure" style="top: 44%; left: 46%; width: 3%; height: 10%;"></div>
+
+											<div class="stand stand--disponible wf--sin-cambios selectable" data-layer-kind="stands" data-selection="stand" data-stand-id="A12" data-commercial="disponible" data-workflow="sin-cambios" data-island="A1" data-size="24" data-exhibitor="NovaTech" data-price="8400" style="top: 16%; left: 12%;">A12</div>
+											<div class="stand stand--reservado wf--modificado selectable" data-layer-kind="stands" data-selection="stand" data-stand-id="A13" data-commercial="reservado" data-workflow="modificado" data-island="A1" data-size="24" data-exhibitor="TechNova" data-price="8450" style="top: 16%; left: 28%;">A13</div>
+											<div class="stand stand--disponible wf--pendiente selectable" data-layer-kind="stands" data-selection="stand" data-stand-id="A14" data-commercial="disponible" data-workflow="pendiente" data-island="A1" data-size="30" data-exhibitor="InnovaLab" data-price="9300" style="top: 16%; left: 44%;">A14</div>
+											<div class="stand stand--vendido wf--pendiente selectable" data-layer-kind="stands" data-selection="proposal" data-stand-id="B04" data-commercial="vendido" data-workflow="pendiente" data-island="B1" data-size="36" data-exhibitor="MegaCorp" data-price="13600" style="top: 16%; left: 60%;">B04</div>
+											<div class="stand stand--bloqueado wf--conflicto selectable" data-layer-kind="stands" data-selection="proposal" data-stand-id="C02" data-commercial="bloqueado" data-workflow="conflicto" data-island="B1" data-size="42" data-exhibitor="DataSystems" data-price="15200" style="top: 34%; left: 12%;">C02</div>
+											<div class="stand stand--disponible wf--rechazado selectable" data-layer-kind="stands" data-selection="proposal" data-stand-id="C18" data-commercial="disponible" data-workflow="rechazado" data-island="B1" data-size="18" data-exhibitor="Startix" data-price="6100" style="top: 34%; left: 28%;">C18</div>
+
+											<div class="group-label" data-group="Startup Area" style="top: 10%; left: 24%;">Startup Area</div>
+											<div id="commentMarkers"></div>
+										</div>
+
+										<div class="legend" id="canvasLegend" data-layer-kind="commercial">
+											<h4>Leyenda</h4>
+											<p><span class="dot disponible"></span>Disponible</p>
+											<p><span class="dot reservado"></span>Reservado</p>
+											<p><span class="dot vendido"></span>Vendido</p>
+											<p><span class="dot bloqueado"></span>Bloqueado</p>
+											<hr />
+											<p data-layer-kind="workflow">Borde azul: Modificado</p>
+											<p data-layer-kind="workflow">Borde naranja: Pendiente</p>
+											<p data-layer-kind="workflow">Borde amarillo: Conflicto</p>
+											<p data-layer-kind="workflow">Borde rojo: Rechazado</p>
+										</div>
+									</div>
+
+									<div class="minimap" id="minimap">
+										<div class="minimap__world" id="minimapWorld"></div>
+										<div class="minimap__viewport" id="minimapViewport"></div>
+									</div>
+								</div>
+							</section>
+
+							<aside class="right-panel panel-collapsible" id="rightPanel">
+								<section class="panel-block context-card" data-context="none">
+									<div class="dock-head">
+										<h3>Inspector y propuesta</h3>
+										<button class="dock-toggle" data-collapse="right">⟩</button>
+									</div>
+									<p class="muted">Selecciona un stand o propuesta para ver detalle.</p>
+									<ul class="list">
+										<li>1.670 stands totales</li>
+										<li>18 solicitudes pendientes</li>
+										<li>5 conflictos activos</li>
+									</ul>
+								</section>
+
+								<section class="panel-block context-card" data-context="stand" hidden>
+									<h3>Stand seleccionado</h3>
+									<ul class="kv" id="selectedStandDetail"></ul>
+								</section>
+
+								<section class="panel-block context-card" data-context="proposal" hidden>
+									<h3>Propuesta C-118</h3>
+									<ul class="list diff-list">
+										<li><button class="link-btn focus-change" data-focus-id="A12">Stand A12: superficie 24 → 30 m²</button></li>
+										<li><button class="link-btn focus-change" data-focus-id="A13">Stand A13: precio actualizado</button></li>
+										<li><button class="link-btn focus-change" data-focus-id="B04">Stand B04: cambio de perímetro</button></li>
+										<li><button class="link-btn focus-change" data-focus-id="C02">Stand C02: conflicto detectado</button></li>
+									</ul>
+									<div class="stack-actions architect-only" hidden>
+										<button class="btn btn--primary">Aprobar</button>
+										<button class="btn btn--secondary">Devolver</button>
+										<button class="btn btn--secondary">Rechazar</button>
+										<button class="btn btn--secondary">Aprobar parcial</button>
+									</div>
+								</section>
+
+								<section class="panel-block">
+									<h3>Comentarios contextuales</h3>
+									<ul class="comment-list" id="commentThreadList"></ul>
+								</section>
+							</aside>
+						</div>
+					</section>
+
+					<section class="screen" id="screen-solicitudes" aria-label="Revisión de solicitudes">
+						<div class="review-toolbar card">
+							<select id="requestSort">
+								<option value="priority">Ordenar por prioridad</option>
+								<option value="date">Ordenar por fecha</option>
+								<option value="changes">Ordenar por nº cambios</option>
+							</select>
+							<select id="requestStatusFilter">
+								<option value="">Filtrar estado</option>
+								<option value="pendiente">Pendiente</option>
+								<option value="en-revision">En revisión</option>
+								<option value="conflicto">Con conflicto</option>
+							</select>
+							<select id="requestGroupBy">
+								<option value="none">Sin agrupación</option>
+								<option value="pabellon">Agrupar por pabellón</option>
+								<option value="isla">Agrupar por isla</option>
+							</select>
+						</div>
+
+						<div class="review-layout">
+							<article class="card">
+								<h3>Bandeja de solicitudes</h3>
+								<ul class="request-list" id="requestList">
+									<li class="request-item is-active" data-status="pendiente" data-priority="3" data-date="2026-03-06" data-changes="4" data-pabellon="A" data-isla="A1">
+										<strong>#C-118 · Marta Ruiz · Alta</strong>
+										<span>4 cambios · 3 stands afectados · hoy · Pab. A / Isla A1</span>
+									</li>
+									<li class="request-item" data-status="en-revision" data-priority="2" data-date="2026-03-05" data-changes="2" data-pabellon="A" data-isla="B1">
+										<strong>#C-117 · Pablo Díaz · Media</strong>
+										<span>2 cambios · 2 stands afectados · ayer · Pab. A / Isla B1</span>
+									</li>
+									<li class="request-item" data-status="conflicto" data-priority="1" data-date="2026-03-04" data-changes="6" data-pabellon="B" data-isla="C2">
+										<strong>#C-116 · Ana Vela · Baja</strong>
+										<span>6 cambios · 5 stands afectados · hace 2 días · Pab. B / Isla C2</span>
+									</li>
+								</ul>
+							</article>
+
+							<article class="card">
+								<h3>Detalle y comparación visual</h3>
+								<ul class="list diff-list">
+									<li class="diff diff--add"><button class="link-btn focus-change" data-focus-id="A12">A12 añadido en isla A1</button></li>
+									<li class="diff diff--remove"><button class="link-btn focus-change" data-focus-id="A14">A14 eliminado por ajuste de pasillo</button></li>
+									<li class="diff diff--modify"><button class="link-btn focus-change" data-focus-id="B04">B04 modificado: perímetro y precio</button></li>
+									<li class="diff diff--conflict"><button class="link-btn focus-change" data-focus-id="C02">C02 en conflicto con versión 24</button></li>
+								</ul>
+							</article>
+						</div>
+					</section>
+
+					<section class="screen" id="screen-versiones" aria-label="Historial de versiones">
+						<article class="card">
+							<h3>Historial y trazabilidad</h3>
+							<div class="version-timeline">
+								<details open>
+									<summary>Versión 24 publicada · 03/03/2026 · Arq. Laura Gómez</summary>
+									<ul class="list">
+										<li>15 stands modificados</li>
+										<li>2 conflictos resueltos</li>
+									</ul>
+									<div class="stack-actions inline-actions">
+										<button class="btn btn--secondary">Comparar con versión 23</button>
+										<button class="btn btn--secondary">Restaurar versión</button>
+									</div>
+								</details>
+								<details>
+									<summary>Versión 23 publicada · 20/02/2026 · Arq. Laura Gómez</summary>
+									<ul class="list">
+										<li>8 stands modificados</li>
+										<li>1 propuesta rechazada</li>
+									</ul>
+									<div class="stack-actions inline-actions">
+										<button class="btn btn--secondary">Comparar con versión 22</button>
+										<button class="btn btn--secondary">Restaurar versión</button>
+									</div>
+								</details>
+							</div>
+						</article>
+					</section>
+
+					<section class="screen" id="screen-expositores" aria-label="Expositores">
+						<article class="card">
+							<h3>Expositores</h3>
+							<p class="muted">Vista de ejemplo para navegación orientada a tareas.</p>
+						</article>
+					</section>
+
+					<section class="screen" id="screen-informes" aria-label="Informes">
+						<article class="card">
+							<h3>Informes</h3>
+							<p class="muted">Vista de ejemplo para navegación orientada a tareas.</p>
+						</article>
+					</section>
+				</main>
+			</div>
+		</div>
+
+		<script src="index.js"></script>
+	</body>
+</html>
